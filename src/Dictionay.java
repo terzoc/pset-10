@@ -58,11 +58,11 @@ public class Dictionay {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(10, 11, 89, 23);
+		btnNewButton.setBounds(2, 11, 89, 23);
 		frmDictionary.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Remove");
-		btnNewButton_1.setBounds(108, 11, 89, 23);
+		btnNewButton_1.setBounds(101, 11, 89, 23);
 		frmDictionary.getContentPane().add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -77,7 +77,7 @@ public class Dictionay {
 		
 		txtSearch = new JTextField();
 		txtSearch.setToolTipText("");
-		txtSearch.setBounds(10, 51, 179, 20);
+		txtSearch.setBounds(12, 45, 179, 20);
 		frmDictionary.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
 		
