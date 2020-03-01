@@ -72,7 +72,7 @@ public class Dictionay {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(22, 110, 160, 322);
+		scrollPane_1.setBounds(22, 110, 168, 450);
 		frmDictionary.getContentPane().add(scrollPane_1);
 		
 		txtSearch = new JTextField();
@@ -83,12 +83,16 @@ public class Dictionay {
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
 		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(22, 78, 59, 23);
+		rdbtnNewRadioButton.setBounds(36, 78, 59, 23);
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
 		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(96, 78, 59, 23);
+		rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(207, 11, 566, 549);
+		frmDictionary.getContentPane().add(scrollPane_2);
 	}
 }
