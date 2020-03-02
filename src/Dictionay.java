@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
+import com.google.gson.Gson;
+
 public class Dictionay {
 
 	private JFrame frmDictionary;
