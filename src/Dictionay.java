@@ -12,7 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
-import gson
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+
 public class Dictionay {
 
 	private JFrame frmDictionary;
@@ -56,6 +60,7 @@ public class Dictionay {
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("add");
 			}
 		});
 		btnNewButton.setBounds(2, 11, 89, 23);
@@ -68,12 +73,6 @@ public class Dictionay {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(490, 332, -57, -98);
 		frmDictionary.getContentPane().add(scrollPane);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(22, 110, 168, 450);
-		frmDictionary.getContentPane().add(scrollPane_1);
 		
 		txtSearch = new JTextField();
 		txtSearch.setToolTipText("");
@@ -94,5 +93,52 @@ public class Dictionay {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(207, 11, 566, 549);
 		frmDictionary.getContentPane().add(scrollPane_2);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 114, 179, 446);
+		frmDictionary.getContentPane().add(scrollPane_1);
+		
+		JList<String> list = new JList<String>();
+		scrollPane_1.setViewportView(list);
+		
+		DefaultListModel<String> DLM =  new DefaultListModel<String>();
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		DLM.addElement("Apple");
+		DLM.addElement("Bannana");
+		DLM.addElement("Carrot");
+		list.setModel(DLM);
 	}
 }
