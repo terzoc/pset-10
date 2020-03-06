@@ -67,6 +67,7 @@ public class Dictionay {
 		
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.addActionListener(new ActionListener() {
+//			add
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("add");
 			}
@@ -76,6 +77,7 @@ public class Dictionay {
 		
 		JButton btnNewButton_1 = new JButton("Remove");
 		btnNewButton_1.addActionListener(new ActionListener() {
+//			remove
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Remove");
 			}
@@ -90,6 +92,7 @@ public class Dictionay {
 		txtSearch = new JTextField();
 		txtSearch.addKeyListener(new KeyAdapter() {
 			@Override
+//			search box
 			public void keyReleased(KeyEvent e) {
 				System.out.println(txtSearch.getText());
 			}
@@ -111,7 +114,7 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
 		
 		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
-			 
+//			 select asc or desc order
 		    @Override
 		    public void itemStateChanged(ItemEvent event) {
 		        int state = event.getStateChange();
