@@ -125,34 +125,6 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(36, 78, 59, 23);
-		frmDictionary.getContentPane().add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setSelected(true);
-		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
-		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
-		
-		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
-//			 select asc or desc order
-		    @Override
-		    public void itemStateChanged(ItemEvent event) {
-		        int state = event.getStateChange();
-		        if (state == ItemEvent.SELECTED) {
-		            System.out.println("desc");
-		 
-		        } else if (state == ItemEvent.DESELECTED) {
-		 
-		        	System.out.println("asc");
-		 
-		        }
-		    }
-
-		});
-		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(207, 11, 566, 549);
 		frmDictionary.getContentPane().add(scrollPane_2);
@@ -172,5 +144,44 @@ public class Dictionay {
 		DefaultListModel<String> DLM =  getWords();
 		
 		list.setModel(DLM);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
+		buttonGroup.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setBounds(36, 78, 59, 23);
+		frmDictionary.getContentPane().add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setSelected(true);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
+		buttonGroup.add(rdbtnNewRadioButton_1);
+		rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
+		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
+//			 select asc or desc order
+		    @Override
+		    public void itemStateChanged(ItemEvent event) {
+		    	
+		        int state = event.getStateChange();
+		        if (state == ItemEvent.SELECTED) {		        	
+		            System.out.println("desc");
+		            try {
+						list.setModel(Utils.reverseOrder(getWords()));
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		            
+		        } else if (state == ItemEvent.DESELECTED) {
+		        	System.out.println("asc");
+		        	try {
+						list.setModel(getWords());
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}		 
+		        }
+		    }
+
+		});
 	}
 }

@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class Words {
     private String word;
     private Definitions[] definitions;
