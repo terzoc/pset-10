@@ -20,6 +20,8 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
 import com.google.gson.Gson;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class Dictionay {
 
@@ -127,6 +129,11 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(scrollPane_1);
 		
 		JList<String> list = new JList<String>();
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				System.out.println(list.getSelectedValue());
+			}
+		});
 		scrollPane_1.setViewportView(list);
 		
 		DefaultListModel<String> DLM =  new DefaultListModel<String>();
