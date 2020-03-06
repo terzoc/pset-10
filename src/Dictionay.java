@@ -27,7 +27,9 @@ import javax.swing.event.ListSelectionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Dictionay {
 
@@ -37,8 +39,9 @@ public class Dictionay {
 
 	/**
 	 * Launch the application.
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		getWords();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,24 +55,32 @@ public class Dictionay {
 		});
 	}
 
-	private static void getWords() {
+	private static DefaultListModel<String> getWords() throws FileNotFoundException{
 		Gson gson = new Gson();
-        BufferedReader br = new BufferedReader(new FileReader("words.json"));
+        String classpathDirectory = Utils.getClasspathDir();
+        BufferedReader br = new BufferedReader(new FileReader(classpathDirectory + "words.json"));
         Words[] words = gson.fromJson(br, Words[].class);
-		
+        DefaultListModel<String> listOfWords = new DefaultListModel<String>();
+        for (Words word : words) {
+        	listOfWords.addElement(word.getWord());
+        }
+       ;
+        return  Utils.sortWordsAsc(listOfWords);
 	}
 
 	/**
 	 * Create the application.
+	 * @throws FileNotFoundException 
 	 */
-	public Dictionay() {
+	public Dictionay() throws FileNotFoundException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws FileNotFoundException 
 	 */
-	private void initialize() {
+	private void initialize() throws FileNotFoundException {
 		frmDictionary = new JFrame();
 		frmDictionary.setResizable(false);
 		frmDictionary.setTitle("Dictionary");
@@ -131,7 +142,6 @@ public class Dictionay {
 		    public void itemStateChanged(ItemEvent event) {
 		        int state = event.getStateChange();
 		        if (state == ItemEvent.SELECTED) {
-		 
 		            System.out.println("desc");
 		 
 		        } else if (state == ItemEvent.DESELECTED) {
@@ -159,44 +169,8 @@ public class Dictionay {
 		});
 		scrollPane_1.setViewportView(list);
 		
-		DefaultListModel<String> DLM =  new DefaultListModel<String>();
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
-		DLM.addElement("Apple");
-		DLM.addElement("Bannana");
-		DLM.addElement("Carrot");
+		DefaultListModel<String> DLM =  getWords();
+		
 		list.setModel(DLM);
 	}
 }
