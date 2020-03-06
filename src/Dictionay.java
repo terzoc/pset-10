@@ -22,6 +22,8 @@ import javax.swing.ListSelectionModel;
 import com.google.gson.Gson;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Dictionay {
 
@@ -86,6 +88,12 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(scrollPane);
 		
 		txtSearch = new JTextField();
+		txtSearch.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				System.out.println(txtSearch.getText());
+			}
+		});
 		txtSearch.setToolTipText("");
 		txtSearch.setBounds(12, 45, 179, 20);
 		frmDictionary.getContentPane().add(txtSearch);
