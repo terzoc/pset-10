@@ -5,6 +5,8 @@ import java.awt.ScrollPane;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -69,6 +71,11 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Remove");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Remove");
+			}
+		});
 		btnNewButton_1.setBounds(101, 11, 89, 23);
 		frmDictionary.getContentPane().add(btnNewButton_1);
 		
@@ -86,11 +93,30 @@ public class Dictionay {
 		buttonGroup.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.setBounds(36, 78, 59, 23);
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setSelected(true);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
+			 
+		    @Override
+		    public void itemStateChanged(ItemEvent event) {
+		        int state = event.getStateChange();
+		        if (state == ItemEvent.SELECTED) {
+		 
+		            System.out.println("desc");
+		 
+		        } else if (state == ItemEvent.DESELECTED) {
+		 
+		        	System.out.println("asc");
+		 
+		        }
+		    }
+
+		});
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(207, 11, 566, 549);
