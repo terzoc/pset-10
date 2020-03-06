@@ -20,10 +20,14 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Dictionay {
 
@@ -35,6 +39,7 @@ public class Dictionay {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		getWords();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -45,6 +50,13 @@ public class Dictionay {
 				}
 			}
 		});
+	}
+
+	private static void getWords() {
+		Gson gson = new Gson();
+        BufferedReader br = new BufferedReader(new FileReader("words.json"));
+        Words[] words = gson.fromJson(br, Words[].class);
+		
 	}
 
 	/**
