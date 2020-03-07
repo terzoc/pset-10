@@ -99,10 +99,37 @@ public class Dictionay {
 		scrollPane_2.setViewportView(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Example");
-		lblNewLabel.setBounds(10, 11, 134, 40);
-		lblNewLabel.setFont(new Font("Sans-Serif", Font.BOLD, 24));
+		JLabel lblNewLabel = new JLabel("Example Word");
+		lblNewLabel.setBounds(10, 11, 528, 40);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Definitions");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(10, 62, 268, 40);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("1. Example (pos)");
+		lblNewLabel_2.setBounds(38, 105, 392, 23);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblSynon = new JLabel("Synonyms");
+		lblSynon.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblSynon.setBounds(10, 139, 268, 40);
+		panel.add(lblSynon);
+		
+		JLabel lblExample = new JLabel("1. Example");
+		lblExample.setBounds(38, 175, 392, 23);
+		panel.add(lblExample);
+		
+		JLabel lblAntonyms = new JLabel("Antonyms");
+		lblAntonyms.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAntonyms.setBounds(10, 213, 268, 40);
+		panel.add(lblAntonyms);
+		
+		JLabel label_1 = new JLabel("1. Example");
+		label_1.setBounds(38, 251, 392, 23);
+		panel.add(label_1);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 114, 179, 446);
