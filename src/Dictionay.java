@@ -26,11 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-
-
 
 public class Dictionay {
 
@@ -138,6 +134,7 @@ public class Dictionay {
 		JList<String> list = new JList<String>();
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				
 				System.out.println(list.getSelectedValue());
 			}
 		});
