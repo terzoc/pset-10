@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 public class Utils {
 	 /**
@@ -35,7 +32,7 @@ public class Utils {
         }
     }    
 
-
+//    Sorts words in ascending order
 	public static DefaultListModel<String> sortWordsAsc(DefaultListModel<String> listOfWords) {
 		String temp;
 		int n = listOfWords.getSize();
