@@ -28,6 +28,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -124,9 +126,11 @@ public class Dictionay {
 		panel.add(lblNewLabel_1);
 		
 		JTextPane txtpnExamplepos = new JTextPane();
+		txtpnExamplepos.setEditable(false);
 		txtpnExamplepos.setText("1. Example (pos)");
 		StyledDocument doc = txtpnExamplepos.getStyledDocument();
 		txtpnExamplepos.setBounds(20, 107, 493, 33);
+		txtpnExamplepos.setPreferredSize(new Dimension(200, 200));
 		panel.add(txtpnExamplepos);
 		
 		JLabel lblSynon = new JLabel("Synonyms");
