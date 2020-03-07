@@ -16,6 +16,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 import javax.swing.event.ListSelectionEvent;
 
 import com.google.gson.Gson;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 public class Dictionay {
 
@@ -120,9 +123,11 @@ public class Dictionay {
 		lblNewLabel_1.setBounds(10, 62, 268, 40);
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("1. Example (pos)");
-		lblNewLabel_2.setBounds(38, 105, 392, 23);
-		panel.add(lblNewLabel_2);
+		JTextPane txtpnExamplepos = new JTextPane();
+		txtpnExamplepos.setText("1. Example (pos)");
+		StyledDocument doc = txtpnExamplepos.getStyledDocument();
+		txtpnExamplepos.setBounds(20, 107, 493, 33);
+		panel.add(txtpnExamplepos);
 		
 		JLabel lblSynon = new JLabel("Synonyms");
 		lblSynon.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -141,6 +146,8 @@ public class Dictionay {
 		JLabel label_1 = new JLabel("1. Example");
 		label_1.setBounds(38, 251, 392, 23);
 		panel.add(label_1);
+		
+		
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 114, 179, 446);
@@ -163,9 +170,11 @@ public class Dictionay {
 						for(Words word: Words) {
 							if(word.getWord().equals(selectedWord)) {
 								lblNewLabel.setText(selectedWord);
+								doc.remove(0, doc.getLength());								 
+								doc.insertString(doc.getLength(), selectedWord, null);
 							}
 						}
-					} catch (FileNotFoundException e) {
+					} catch (FileNotFoundException | BadLocationException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}					
