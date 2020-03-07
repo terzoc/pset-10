@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -23,6 +24,11 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 
 
@@ -87,6 +93,16 @@ public class Dictionay {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(207, 11, 566, 549);
 		frmDictionary.getContentPane().add(scrollPane_2);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		scrollPane_2.setViewportView(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Example");
+		lblNewLabel.setBounds(10, 11, 134, 40);
+		lblNewLabel.setFont(new Font("Sans-Serif", Font.BOLD, 24));
+		panel.add(lblNewLabel);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 114, 179, 446);
@@ -207,7 +223,7 @@ public class Dictionay {
 				  
 			}
 		});
-		txtSearch.setToolTipText("");
+		txtSearch.setToolTipText("Search");
 		txtSearch.setBounds(12, 45, 179, 20);
 		frmDictionary.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
