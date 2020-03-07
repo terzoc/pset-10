@@ -133,9 +133,14 @@ public class Dictionay {
 		
 		JList<String> list = new JList<String>();
 		list.addListSelectionListener(new ListSelectionListener() {
+			boolean ranOnce = false;
 			public void valueChanged(ListSelectionEvent arg0) {
-				
-				System.out.println(list.getSelectedValue());
+				if(ranOnce) {
+					ranOnce = false;
+				}else {
+					System.out.println(list.getSelectedValue());
+					ranOnce = true;
+				}
 			}
 		});
 		scrollPane_1.setViewportView(list);
