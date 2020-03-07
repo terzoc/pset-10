@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+
 public class Dictionay {
 
 	private JFrame frmDictionary;
@@ -81,6 +82,26 @@ public class Dictionay {
 		frmDictionary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDictionary.getContentPane().setLayout(null);
 		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(207, 11, 566, 549);
+		frmDictionary.getContentPane().add(scrollPane_2);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 114, 179, 446);
+		frmDictionary.getContentPane().add(scrollPane_1);
+		
+		JList<String> list = new JList<String>();
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				System.out.println(list.getSelectedValue());
+			}
+		});
+		scrollPane_1.setViewportView(list);
+		
+		DefaultListModel<String> DLM =  getWords();
+		
+		list.setModel(DLM);
+		
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.addActionListener(new ActionListener() {
 //			add
@@ -110,7 +131,23 @@ public class Dictionay {
 			@Override
 //			search box
 			public void keyReleased(KeyEvent e) {
-				System.out.println(txtSearch.getText());
+				String searched = txtSearch.getText().toLowerCase();
+				System.out.println(searched);
+				try {
+					DefaultListModel<String> words = getWords();
+					DefaultListModel<String> filtered = new DefaultListModel<String>();
+					for(int i = 0 ; i < words.size(); i++) {
+						if((words.get(i).startsWith(searched))) {
+							System.out.println(words.get(i));
+							filtered.addElement(words.get(i));							
+						}
+					}
+					list.setModel(filtered);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				  
 			}
 		});
 		txtSearch.setToolTipText("");
@@ -118,25 +155,7 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(207, 11, 566, 549);
-		frmDictionary.getContentPane().add(scrollPane_2);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 114, 179, 446);
-		frmDictionary.getContentPane().add(scrollPane_1);
-		
-		JList<String> list = new JList<String>();
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				System.out.println(list.getSelectedValue());
-			}
-		});
-		scrollPane_1.setViewportView(list);
-		
-		DefaultListModel<String> DLM =  getWords();
-		
-		list.setModel(DLM);
+
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
 		buttonGroup.add(rdbtnNewRadioButton);
