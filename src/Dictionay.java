@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -64,6 +65,20 @@ public class Dictionay {
         }
        ;
         return  Utils.sortWordsAsc(listOfWords);
+	}
+	
+//	get DLM of words sorted in asc order
+	private static ArrayList<Words> getWordClass() throws FileNotFoundException{
+		Gson gson = new Gson();
+        String classpathDirectory = Utils.getClasspathDir();
+        BufferedReader br = new BufferedReader(new FileReader(classpathDirectory + "words.json"));
+        Words[] words = gson.fromJson(br, Words[].class);
+        ArrayList<Words> listOfWords = new ArrayList<Words>();
+        for (Words word : words) {
+        	listOfWords.add(word);
+        }
+       ;
+        return listOfWords;
 	}
 
 	/**
@@ -138,8 +153,23 @@ public class Dictionay {
 				if(ranOnce) {
 					ranOnce = false;
 				}else {
-					System.out.println(list.getSelectedValue());
 					ranOnce = true;
+					
+					String selectedWord = list.getSelectedValue();
+					System.out.println(selectedWord);
+					
+					try {
+						ArrayList<Words> Words = getWordClass();
+						for(Words word: Words) {
+							if(word.getWord().equals(selectedWord)) {
+								lblNewLabel.setText(selectedWord);
+							}
+						}
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}					
+					
 				}
 			}
 		});
