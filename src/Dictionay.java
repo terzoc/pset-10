@@ -126,34 +126,7 @@ public class Dictionay {
 		scrollPane.setBounds(490, 332, -57, -98);
 		frmDictionary.getContentPane().add(scrollPane);
 		
-		txtSearch = new JTextField();
-		txtSearch.addKeyListener(new KeyAdapter() {
-			@Override
-//			search box
-			public void keyReleased(KeyEvent e) {
-				String searched = txtSearch.getText().toLowerCase();
-				System.out.println(searched);
-				try {
-					DefaultListModel<String> words = getWords();
-					DefaultListModel<String> filtered = new DefaultListModel<String>();
-					for(int i = 0 ; i < words.size(); i++) {
-						if((words.get(i).startsWith(searched))) {
-							System.out.println(words.get(i));
-							filtered.addElement(words.get(i));							
-						}
-					}
-					list.setModel(filtered);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				  
-			}
-		});
-		txtSearch.setToolTipText("");
-		txtSearch.setBounds(12, 45, 179, 20);
-		frmDictionary.getContentPane().add(txtSearch);
-		txtSearch.setColumns(10);
+		
 		
 
 		
@@ -167,7 +140,6 @@ public class Dictionay {
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
 		frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
-		
 		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
 //			 select asc or desc order
 		    @Override
@@ -177,6 +149,7 @@ public class Dictionay {
 		        if (state == ItemEvent.SELECTED) {		        	
 		            System.out.println("desc");
 		            try {
+		            	txtSearch.setText("");
 						list.setModel(Utils.reverseOrder(getWords()));
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -186,6 +159,7 @@ public class Dictionay {
 		        } else if (state == ItemEvent.DESELECTED) {
 		        	System.out.println("asc");
 		        	try {
+		        		txtSearch.setText("");
 						list.setModel(getWords());
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -195,5 +169,45 @@ public class Dictionay {
 		    }
 
 		});
+		
+		txtSearch = new JTextField();
+		txtSearch.addKeyListener(new KeyAdapter() {
+			@Override
+//			search box
+			public void keyReleased(KeyEvent e) {
+				String searched = txtSearch.getText().toLowerCase();
+				System.out.println(searched);
+				DefaultListModel<String> words = new DefaultListModel<String>();
+				if (!rdbtnNewRadioButton.isSelected()) {		        	
+				    try {
+				    	words = Utils.reverseOrder(getWords());
+					} catch (FileNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				    
+				} else {
+					try {
+						words = getWords();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}		 
+				}
+				DefaultListModel<String> filtered = new DefaultListModel<String>();
+				for(int i = 0 ; i < words.size(); i++) {
+					if((words.get(i).startsWith(searched))) {
+						System.out.println(words.get(i));
+						filtered.addElement(words.get(i));							
+					}
+				}
+				list.setModel(filtered);
+				  
+			}
+		});
+		txtSearch.setToolTipText("");
+		txtSearch.setBounds(12, 45, 179, 20);
+		frmDictionary.getContentPane().add(txtSearch);
+		txtSearch.setColumns(10);
 	}
 }

@@ -55,7 +55,7 @@ public class Utils {
 	}
 
 
-	public static ListModel<String> reverseOrder(DefaultListModel<String> words) {
+	public static DefaultListModel<String> reverseOrder(DefaultListModel<String> words) {
 		DefaultListModel<String> b = new DefaultListModel<String>(); 
 		int n = words.getSize();
         int j = n; 
