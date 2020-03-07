@@ -1,10 +1,7 @@
 import javax.swing.DefaultListModel;
 
 public class Utils {
-	 /**
-     * Needed to obtain resources (such as words.json) from the classpath's directory
-     * @return string that returns the directory in the classpath with required resources
-     */
+//		Returns the classpath for json file
     public static String getClasspathDir() {
         String classpath = System.getProperty("java.class.path", ".");
         boolean windows = false;
