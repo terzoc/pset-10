@@ -34,6 +34,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class Dictionay {
 
@@ -111,28 +113,11 @@ public class Dictionay {
 		scrollPane_2.setBounds(207, 11, 566, 549);
 		frmDictionary.getContentPane().add(scrollPane_2);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		scrollPane_2.setViewportView(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Example Word");
-		lblNewLabel.setBounds(10, 11, 528, 40);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Definitions");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(10, 62, 268, 40);
-		panel.add(lblNewLabel_1);
-		
-		JTextPane txtpnExamplepos = new JTextPane();
-		txtpnExamplepos.setEditable(false);
-		txtpnExamplepos.setText("1. Example (pos)");
-		StyledDocument doc = txtpnExamplepos.getStyledDocument();
-		txtpnExamplepos.setBounds(20, 101, 518, 845);
-		txtpnExamplepos.setPreferredSize(new Dimension(200, 200));
-		panel.add(txtpnExamplepos);
+		JTextPane textPane = new JTextPane();
+		textPane.setText("1. Example (pos)");
+		textPane.setEditable(false);
+		scrollPane_2.setViewportView(textPane);
+		StyledDocument doc = textPane.getStyledDocument();
 		
 		
 		
@@ -156,7 +141,7 @@ public class Dictionay {
 						ArrayList<Words> Words = getWordClass();
 						for(Words word: Words) {
 							if(word.getWord().equals(selectedWord)) {
-								lblNewLabel.setText(selectedWord);
+//								lblNewLabel.setText(selectedWord);
 								doc.remove(0, doc.getLength());
 								Definitions[] definitions = word.getDefinitions();
 								int definitionCounter = 1;
@@ -173,6 +158,7 @@ public class Dictionay {
 					}					
 					
 				}
+				scrollPane_2.getVerticalScrollBar().setValue(0);
 			}
 		});
 		scrollPane_1.setViewportView(list);
