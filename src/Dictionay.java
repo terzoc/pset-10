@@ -17,6 +17,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.StyledDocument;
 import javax.swing.event.ListSelectionEvent;
 
@@ -118,6 +119,8 @@ public class Dictionay {
 		textPane.setEditable(false);
 		scrollPane_2.setViewportView(textPane);
 		StyledDocument doc = textPane.getStyledDocument();
+		DefaultCaret caret = (DefaultCaret) textPane.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 		
 		
 		
@@ -156,9 +159,7 @@ public class Dictionay {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}					
-					
-				}
-				scrollPane_2.getVerticalScrollBar().setValue(0);
+				}				
 			}
 		});
 		scrollPane_1.setViewportView(list);
