@@ -33,6 +33,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.DropMode;
 
 public class Dictionay {
 
@@ -129,27 +130,9 @@ public class Dictionay {
 		txtpnExamplepos.setEditable(false);
 		txtpnExamplepos.setText("1. Example (pos)");
 		StyledDocument doc = txtpnExamplepos.getStyledDocument();
-		txtpnExamplepos.setBounds(20, 107, 493, 33);
+		txtpnExamplepos.setBounds(20, 107, 493, 839);
 		txtpnExamplepos.setPreferredSize(new Dimension(200, 200));
 		panel.add(txtpnExamplepos);
-		
-		JLabel lblSynon = new JLabel("Synonyms");
-		lblSynon.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblSynon.setBounds(10, 139, 268, 40);
-		panel.add(lblSynon);
-		
-		JLabel lblExample = new JLabel("1. Example");
-		lblExample.setBounds(38, 175, 392, 23);
-		panel.add(lblExample);
-		
-		JLabel lblAntonyms = new JLabel("Antonyms");
-		lblAntonyms.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAntonyms.setBounds(10, 213, 268, 40);
-		panel.add(lblAntonyms);
-		
-		JLabel label_1 = new JLabel("1. Example");
-		label_1.setBounds(38, 251, 392, 23);
-		panel.add(label_1);
 		
 		
 		
@@ -178,7 +161,7 @@ public class Dictionay {
 								Definitions[] definitions = word.getDefinitions();
 								int definitionCounter = 1;
 								for (Definitions definition : definitions) {
-									doc.insertString(doc.getLength(), definitionCounter + ". " + definition.getDefinition() + "\n", null);
+									doc.insertString(doc.getLength(), definitionCounter + "." + selectedWord +" (" + definition.getPartOfSpeech() +")\n    "  +  definition.getDefinition() + "\n\n", null);
 									definitionCounter++;
 								}
 								
