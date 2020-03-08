@@ -130,7 +130,7 @@ public class Dictionay {
 		txtpnExamplepos.setEditable(false);
 		txtpnExamplepos.setText("1. Example (pos)");
 		StyledDocument doc = txtpnExamplepos.getStyledDocument();
-		txtpnExamplepos.setBounds(20, 107, 493, 839);
+		txtpnExamplepos.setBounds(20, 101, 518, 845);
 		txtpnExamplepos.setPreferredSize(new Dimension(200, 200));
 		panel.add(txtpnExamplepos);
 		
@@ -161,7 +161,7 @@ public class Dictionay {
 								Definitions[] definitions = word.getDefinitions();
 								int definitionCounter = 1;
 								for (Definitions definition : definitions) {
-									doc.insertString(doc.getLength(), definitionCounter + "." + selectedWord +" (" + definition.getPartOfSpeech() +")\n    "  +  definition.getDefinition() + "\n\n", null);
+									doc.insertString(doc.getLength(), definitionCounter + "." + selectedWord +" (" + definition.getPartOfSpeech() +")\n\n    "  +  definition.getDefinition() + "\n\n", null);
 									definitionCounter++;
 								}
 								
