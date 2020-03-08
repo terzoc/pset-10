@@ -168,6 +168,28 @@ public class Dictionay {
 									doc.insertString(doc.getLength(), definitionCounter + "." + selectedWord +" (" + definition.getPartOfSpeech() +")\n\n    "  +  definition.getDefinition() + "\n\n", null);
 									definitionCounter++;
 								}
+								String[] synonyms = word.getSynonyms();
+								if(synonyms.length != 0) {
+									doc.insertString(doc.getLength(),"Synonyms\n" ,header );
+									doc.insertString(doc.getLength(),"\n" ,null );
+									int synonymCounter = 1;
+									for(String synonym : synonyms) {
+										
+										doc.insertString(doc.getLength(), synonymCounter + "." + synonym + "\n", null);
+										synonymCounter++;
+									}
+								}
+								String[] antonyms = word.getAntonyms();
+								if (antonyms.length != 0) {
+									doc.insertString(doc.getLength(),"\n" ,null );
+									doc.insertString(doc.getLength(),"Antonyms\n" ,header );
+									doc.insertString(doc.getLength(),"\n" ,null );
+									int antonymCounter = 1;
+									for(String antonym : antonyms) {
+										doc.insertString(doc.getLength(), antonymCounter + "." + antonym + "\n", null);
+										antonymCounter++;
+									}
+								}
 								
 							}
 						}
