@@ -174,8 +174,14 @@ public class Dictionay {
 						for(Words word: Words) {
 							if(word.getWord().equals(selectedWord)) {
 								lblNewLabel.setText(selectedWord);
-								doc.remove(0, doc.getLength());								 
-								doc.insertString(doc.getLength(), selectedWord, null);
+								doc.remove(0, doc.getLength());
+								Definitions[] definitions = word.getDefinitions();
+								int definitionCounter = 1;
+								for (Definitions definition : definitions) {
+									doc.insertString(doc.getLength(), definitionCounter + ". " + definition.getDefinition() + "\n", null);
+									definitionCounter++;
+								}
+								
 							}
 						}
 					} catch (FileNotFoundException | BadLocationException e) {
