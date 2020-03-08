@@ -1,4 +1,4 @@
-run Dicionay.java
+run Dictionay.java
 
 p.s. 
 yes
