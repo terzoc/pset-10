@@ -18,6 +18,7 @@ import javax.swing.JList;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 import javax.swing.event.ListSelectionEvent;
 
@@ -144,8 +145,8 @@ public class Dictionay {
 						ArrayList<Words> Words = getWordClass();
 						for(Words word: Words) {
 							if(word.getWord().equals(selectedWord)) {
-//								lblNewLabel.setText(selectedWord);
 								doc.remove(0, doc.getLength());
+//								Style bigWord = textPane.addStyle()
 								Definitions[] definitions = word.getDefinitions();
 								int definitionCounter = 1;
 								for (Definitions definition : definitions) {
