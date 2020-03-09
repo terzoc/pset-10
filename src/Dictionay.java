@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -87,16 +88,18 @@ public class Dictionay {
 	/**
 	 * Create the application.
 	 * @throws FileNotFoundException 
+	 * @throws BadLocationException 
 	 */
-	public Dictionay() throws FileNotFoundException {
+	public Dictionay() throws FileNotFoundException, BadLocationException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws FileNotFoundException 
+	 * @throws BadLocationException 
 	 */
-	private void initialize() throws FileNotFoundException {
+	private void initialize() throws FileNotFoundException, BadLocationException {
 		frmDictionary = new JFrame();
 		frmDictionary.setResizable(false);
 		frmDictionary.setTitle("Dictionary");
@@ -109,7 +112,6 @@ public class Dictionay {
 		frmDictionary.getContentPane().add(scrollPane_2);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setText("1. Example (pos)");
 		textPane.setEditable(false);
 		scrollPane_2.setViewportView(textPane);
 		StyledDocument doc = textPane.getStyledDocument();
@@ -118,8 +120,13 @@ public class Dictionay {
 		textPane.setBorder(BorderFactory.createCompoundBorder(
 				textPane.getBorder(), 
 		        BorderFactory.createEmptyBorder(10, 10 ,10 , 10)));
-		
-		
+		Style bigWord = textPane.addStyle("Style", null);
+		Style header = textPane.addStyle("Style", null);
+		StyleConstants.setFontSize(header, 20);
+//		StyleConstants.setBold(header, true);
+		StyleConstants.setFontSize(bigWord, 36);
+		StyleConstants.setBold(bigWord, true);
+		doc.insertString(doc.getLength(),"\n" ,null );
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(12, 114, 179, 446);
@@ -141,13 +148,7 @@ public class Dictionay {
 						ArrayList<Words> Words = getWordClass();
 						for(Words word: Words) {
 							if(word.getWord().equals(selectedWord)) {
-								doc.remove(0, doc.getLength());
-								Style bigWord = textPane.addStyle("Style", null);
-								Style header = textPane.addStyle("Style", null);
-								StyleConstants.setFontSize(header, 20);
-//								StyleConstants.setBold(header, true);
-								StyleConstants.setFontSize(bigWord, 36);
-								StyleConstants.setBold(bigWord, true);
+								doc.remove(0, doc.getLength());								
 								doc.insertString(doc.getLength(),selectedWord.substring(0, 1).toUpperCase() + selectedWord.substring(1) + "\n" ,bigWord );
 								doc.insertString(doc.getLength(),"\n" ,null );
 								doc.insertString(doc.getLength(),"Definitions\n" ,header );
