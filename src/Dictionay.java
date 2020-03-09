@@ -87,7 +87,7 @@ public class Dictionay {
        ;
         return listOfWords;
   }
-  
+
   /**
    * Create the application.
    * @throws FileNotFoundException
@@ -129,7 +129,7 @@ public class Dictionay {
 //    StyleConstants.setBold(header, true);
     StyleConstants.setFontSize(bigWord, 36);
     StyleConstants.setBold(bigWord, true);
-    
+
     doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
     doc.insertString(doc.getLength(),"\n" , null );
     doc.insertString(doc.getLength(),"Definitions\n" ,header );
@@ -141,12 +141,12 @@ public class Dictionay {
     doc.insertString(doc.getLength(),"\n\n" ,null );
     doc.insertString(doc.getLength(),"Antonyms\n" ,header );
     doc.insertString(doc.getLength(),"\n1.Antonym " ,null );
-    
+
     JScrollPane scrollPane_1 = new JScrollPane();
     scrollPane_1.setBounds(12, 114, 179, 446);
     frmDictionary.getContentPane().add(scrollPane_1);
 
-    JList<String> list = new JList<String>();   
+    JList<String> list = new JList<String>();
     list.addListSelectionListener(new ListSelectionListener() {
       boolean ranOnce = false;
       public void valueChanged(ListSelectionEvent arg0) {
@@ -225,69 +225,69 @@ public class Dictionay {
     btnNewButton_1.addActionListener(new ActionListener() {
 //      remove
       public void actionPerformed(ActionEvent arg0) {
-		List<String> selectedWords = list.getSelectedValuesList();    	  
+    List<String> selectedWords = list.getSelectedValuesList();
         System.out.println("remove");
         try {
-        	Boolean wordFound = false;
-			ArrayList<Words> words = getWordClass();
-			ArrayList<Words> wordsToRemove = new ArrayList<Words>();
-			for(String selectedWord : selectedWords) {
-				for (Words word : words) {
-			          if(selectedWord.equals(word.getWord())) {
-			        	  wordsToRemove.add(word);
-			        	  wordFound = true;
-			          }
-			      }
-	        }
-			if(wordFound) {
-				for (Words word: wordsToRemove) {
-					words.remove(word);
-				}
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				String classpathDirectory = Utils.getClasspathDir();
-				 try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
-			            gson.toJson(words, writer);
-			            System.out.println("word removed");
-			        } catch (IOException e) {
-			            e.printStackTrace( );
-			        }
-				 
-				 
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        DefaultListModel<String> DLM;
-		try {
-			DLM = getWords();
-			list.setModel(DLM);
-			doc.remove(0, doc.getLength());
-			doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
-		    doc.insertString(doc.getLength(),"\n" , null );
-		    doc.insertString(doc.getLength(),"Definitions\n" ,header );
-		    doc.insertString(doc.getLength(),"\n" ,null );
-		    doc.insertString(doc.getLength(),"1. Example Word (pos) \n\n    Definition of example word\n\n" ,null );
-		    doc.insertString(doc.getLength(),"\n" ,null );
-		    doc.insertString(doc.getLength(),"Synonyms\n" ,header );
-		    doc.insertString(doc.getLength(),"\n1.Synonym " ,null );
-		    doc.insertString(doc.getLength(),"\n\n" ,null );
-		    doc.insertString(doc.getLength(),"Antonyms\n" ,header );
-		    doc.insertString(doc.getLength(),"\n1.Antonym " ,null );
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+          Boolean wordFound = false;
+      ArrayList<Words> words = getWordClass();
+      ArrayList<Words> wordsToRemove = new ArrayList<Words>();
+      for(String selectedWord : selectedWords) {
+        for (Words word : words) {
+                if(selectedWord.equals(word.getWord())) {
+                  wordsToRemove.add(word);
+                  wordFound = true;
+                }
+            }
+          }
+      if(wordFound) {
+        for (Words word: wordsToRemove) {
+          words.remove(word);
+        }
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String classpathDirectory = Utils.getClasspathDir();
+         try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
+                  gson.toJson(words, writer);
+                  System.out.println("word removed");
+              } catch (IOException e) {
+                  e.printStackTrace( );
+              }
 
-        
-        
+
+      }
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+        DefaultListModel<String> DLM;
+    try {
+      DLM = getWords();
+      list.setModel(DLM);
+      doc.remove(0, doc.getLength());
+      doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
+        doc.insertString(doc.getLength(),"\n" , null );
+        doc.insertString(doc.getLength(),"Definitions\n" ,header );
+        doc.insertString(doc.getLength(),"\n" ,null );
+        doc.insertString(doc.getLength(),"1. Example Word (pos) \n\n    Definition of example word\n\n" ,null );
+        doc.insertString(doc.getLength(),"\n" ,null );
+        doc.insertString(doc.getLength(),"Synonyms\n" ,header );
+        doc.insertString(doc.getLength(),"\n1.Synonym " ,null );
+        doc.insertString(doc.getLength(),"\n\n" ,null );
+        doc.insertString(doc.getLength(),"Antonyms\n" ,header );
+        doc.insertString(doc.getLength(),"\n1.Antonym " ,null );
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (BadLocationException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+
+
       }
     });
-    
+
     btnNewButton_1.setBounds(101, 11, 89, 23);
     frmDictionary.getContentPane().add(btnNewButton_1);
 
