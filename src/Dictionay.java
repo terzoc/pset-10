@@ -25,12 +25,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.BorderFactory;
 
 import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class Dictionay {
         String classpathDirectory = Utils.getClasspathDir();
         BufferedReader br = new BufferedReader(new FileReader(classpathDirectory + "words.json"));
         Words[] words = gson.fromJson(br, Words[].class);
+        System.out.println(words.length + " words added");
         DefaultListModel<String> listOfWords = new DefaultListModel<String>();
         for (Words word : words) {
           listOfWords.addElement(word.getWord());
@@ -72,7 +74,7 @@ public class Dictionay {
         return  Utils.sortWordsAsc(listOfWords);
   }
 
-//  get DLM of words sorted in asc order
+//  get ArrayList of words sorted in asc order
   private static ArrayList<Words> getWordClass() throws FileNotFoundException{
     Gson gson = new Gson();
         String classpathDirectory = Utils.getClasspathDir();
@@ -85,7 +87,7 @@ public class Dictionay {
        ;
         return listOfWords;
   }
-
+  
   /**
    * Create the application.
    * @throws FileNotFoundException
@@ -208,7 +210,6 @@ public class Dictionay {
     DefaultListModel<String> DLM =  getWords();
 
     list.setModel(DLM);
-//    list.setSelectedIndices(new int[] { 0,  DLM.size()});
 
     JButton btnNewButton = new JButton("Add");
     btnNewButton.addActionListener(new ActionListener() {
@@ -226,21 +227,73 @@ public class Dictionay {
       public void actionPerformed(ActionEvent arg0) {
 		List<String> selectedWords = list.getSelectedValuesList();    	  
         System.out.println("remove");
-        for(String word : selectedWords) {
-        	System.out.println(word);
-        }
+        try {
+        	Boolean wordFound = false;
+			ArrayList<Words> words = getWordClass();
+			ArrayList<Words> wordsToRemove = new ArrayList<Words>();
+			for(String selectedWord : selectedWords) {
+				for (Words word : words) {
+			          if(selectedWord.equals(word.getWord())) {
+			        	  wordsToRemove.add(word);
+			        	  wordFound = true;
+			          }
+			      }
+	        }
+			if(wordFound) {
+				for (Words word: wordsToRemove) {
+					words.remove(word);
+				}
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				String classpathDirectory = Utils.getClasspathDir();
+				 try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
+			            gson.toJson(words, writer);
+			            System.out.println("word removed");
+			        } catch (IOException e) {
+			            e.printStackTrace( );
+			        }
+				 
+				 
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        DefaultListModel<String> DLM;
+		try {
+			DLM = getWords();
+			list.setModel(DLM);
+			doc.remove(0, doc.getLength());
+			doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
+		    doc.insertString(doc.getLength(),"\n" , null );
+		    doc.insertString(doc.getLength(),"Definitions\n" ,header );
+		    doc.insertString(doc.getLength(),"\n" ,null );
+		    doc.insertString(doc.getLength(),"1. Example Word (pos) \n\n    Definition of example word\n\n" ,null );
+		    doc.insertString(doc.getLength(),"\n" ,null );
+		    doc.insertString(doc.getLength(),"Synonyms\n" ,header );
+		    doc.insertString(doc.getLength(),"\n1.Synonym " ,null );
+		    doc.insertString(doc.getLength(),"\n\n" ,null );
+		    doc.insertString(doc.getLength(),"Antonyms\n" ,header );
+		    doc.insertString(doc.getLength(),"\n1.Antonym " ,null );
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        
+        
       }
     });
+    
     btnNewButton_1.setBounds(101, 11, 89, 23);
     frmDictionary.getContentPane().add(btnNewButton_1);
 
     JScrollPane scrollPane = new JScrollPane();
     scrollPane.setBounds(490, 332, -57, -98);
     frmDictionary.getContentPane().add(scrollPane);
-
-
-
-
 
     JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
     buttonGroup.add(rdbtnNewRadioButton);
