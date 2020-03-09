@@ -21,6 +21,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.BorderFactory;
 
 import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
@@ -28,9 +29,8 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
+import java.util.ArrayList;
 
 public class Dictionay {
 
