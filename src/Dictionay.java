@@ -32,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dictionay {
 
@@ -143,7 +144,7 @@ public class Dictionay {
     scrollPane_1.setBounds(12, 114, 179, 446);
     frmDictionary.getContentPane().add(scrollPane_1);
 
-    JList<String> list = new JList<String>();
+    JList<String> list = new JList<String>();   
     list.addListSelectionListener(new ListSelectionListener() {
       boolean ranOnce = false;
       public void valueChanged(ListSelectionEvent arg0) {
@@ -207,6 +208,7 @@ public class Dictionay {
     DefaultListModel<String> DLM =  getWords();
 
     list.setModel(DLM);
+//    list.setSelectedIndices(new int[] { 0,  DLM.size()});
 
     JButton btnNewButton = new JButton("Add");
     btnNewButton.addActionListener(new ActionListener() {
@@ -222,7 +224,11 @@ public class Dictionay {
     btnNewButton_1.addActionListener(new ActionListener() {
 //      remove
       public void actionPerformed(ActionEvent arg0) {
-        System.out.println("Remove");
+		List<String> selectedWords = list.getSelectedValuesList();    	  
+        System.out.println("remove");
+        for(String word : selectedWords) {
+        	System.out.println(word);
+        }
       }
     });
     btnNewButton_1.setBounds(101, 11, 89, 23);
