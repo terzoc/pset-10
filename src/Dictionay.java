@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
@@ -240,9 +241,13 @@ public class Dictionay {
             }
           }
       if(wordFound) {
-        for (Words word: wordsToRemove) {
-          words.remove(word);
-        }
+    	  int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete the following word(s)\nfrom the ditionary?\n\nThis action cannot be undone.\n\n","Warning",JOptionPane.YES_NO_OPTION);
+    	  if(dialogResult == JOptionPane.YES_OPTION){
+    		  for (Words word: wordsToRemove) {
+    	          words.remove(word);
+    	        }
+    	  }
+        
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String classpathDirectory = Utils.getClasspathDir();
          try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
