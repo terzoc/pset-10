@@ -211,6 +211,9 @@ public class Dictionay {
     DefaultListModel<String> DLM =  getWords();
 
     list.setModel(DLM);
+    
+    JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
+    JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
 
     JButton btnNewButton = new JButton("Add");
     btnNewButton.addActionListener(new ActionListener() {
@@ -263,10 +266,24 @@ public class Dictionay {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+        DefaultListModel<String> DLM = null;
+    try {  
+        if (!rdbtnNewRadioButton.isSelected()) {
+            try {
+            	DLM = Utils.reverseOrder(getWords());
+          } catch (FileNotFoundException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+          }
 
-        DefaultListModel<String> DLM;
-    try {
-      DLM = getWords();
+        } else {
+          try {
+        	  DLM = getWords();
+          } catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          }
+        }
       list.setModel(DLM);
       doc.remove(0, doc.getLength());
       doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
@@ -280,9 +297,6 @@ public class Dictionay {
         doc.insertString(doc.getLength(),"\n\n" ,null );
         doc.insertString(doc.getLength(),"Antonyms\n" ,header );
         doc.insertString(doc.getLength(),"\n1.Antonym " ,null );
-    } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
     } catch (BadLocationException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -299,14 +313,13 @@ public class Dictionay {
     JScrollPane scrollPane = new JScrollPane();
     scrollPane.setBounds(490, 332, -57, -98);
     frmDictionary.getContentPane().add(scrollPane);
-
-    JRadioButton rdbtnNewRadioButton = new JRadioButton("Asc");
+   
     buttonGroup.add(rdbtnNewRadioButton);
     rdbtnNewRadioButton.setBounds(36, 78, 59, 23);
     frmDictionary.getContentPane().add(rdbtnNewRadioButton);
     rdbtnNewRadioButton.setSelected(true);
 
-    JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Desc");
+    
     buttonGroup.add(rdbtnNewRadioButton_1);
     rdbtnNewRadioButton_1.setBounds(110, 78, 59, 23);
     frmDictionary.getContentPane().add(rdbtnNewRadioButton_1);
