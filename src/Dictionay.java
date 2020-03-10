@@ -35,6 +35,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
 
 public class Dictionay {
 
@@ -114,10 +117,27 @@ public class Dictionay {
     JScrollPane scrollPane_2 = new JScrollPane();
     scrollPane_2.setBounds(207, 11, 566, 549);
     frmDictionary.getContentPane().add(scrollPane_2);
+    
 
+    
+   
+    
+    JPanel panel = new JPanel();
+    panel.setEnabled(false);
+    panel.setVisible(false);
+    panel.setBackground(Color.WHITE);
+    panel.setLayout(null);
+    JLabel lblBruh = new JLabel("Bruh");
+    lblBruh.setBounds(70, 99, 208, 51);
+    panel.add(lblBruh);
+    
     JTextPane textPane = new JTextPane();
+//  textPane.setEnabled(false);
+//  textPane.setVisible(false);
     textPane.setEditable(false);
     scrollPane_2.setViewportView(textPane);
+
+    
     StyledDocument doc = textPane.getStyledDocument();
     DefaultCaret caret = (DefaultCaret) textPane.getCaret();
     caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
@@ -131,6 +151,7 @@ public class Dictionay {
     StyleConstants.setFontSize(bigWord, 36);
     StyleConstants.setBold(bigWord, true);
 
+    doc.remove(0, doc.getLength());
     doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
     doc.insertString(doc.getLength(),"\n" , null );
     doc.insertString(doc.getLength(),"Definitions\n" ,header );
@@ -220,6 +241,11 @@ public class Dictionay {
 //      add
       public void actionPerformed(ActionEvent e) {
         System.out.println("add");
+        frmDictionary.remove(textPane);
+        scrollPane_2.revalidate();
+        scrollPane_2.repaint();
+        scrollPane_2.validate(); 
+//      scrollPane_2.setViewportView(panel);
       }
     });
     btnNewButton.setBounds(2, 11, 89, 23);
