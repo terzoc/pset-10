@@ -80,7 +80,7 @@ public class Dictionay {
         System.out.println(words.length + " words added");
         DefaultListModel<String> listOfWords = new DefaultListModel<String>();
         for (Words word : words) {
-          listOfWords.addElement(word.getWord());
+          listOfWords.addElement(word.getWord().toLowerCase());
         }
        ;
         return  Utils.sortWordsAsc(listOfWords);
@@ -136,7 +136,7 @@ public class Dictionay {
     scrollPane_3.setViewportView(panel_1);
     panel_1.setLayout(null);
     
-    JLabel lblNewLabel = new JLabel("Word");
+    JLabel lblNewLabel = new JLabel("Word*");
     lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
     lblNewLabel.setBounds(10, 11, 117, 54);
     panel_1.add(lblNewLabel);
@@ -151,7 +151,7 @@ public class Dictionay {
     btnNewButton_2.setBounds(465, 513, 89, 23);
     panel_1.add(btnNewButton_2);
     
-    JLabel lblDefinitions = new JLabel("Definitions");
+    JLabel lblDefinitions = new JLabel("Definitions*");
     lblDefinitions.setFont(new Font("Tahoma", Font.BOLD, 32));
     lblDefinitions.setBounds(10, 107, 199, 54);
     panel_1.add(lblDefinitions);
@@ -168,7 +168,7 @@ public class Dictionay {
     textField_2.setBounds(346, 182, 147, 20);
     panel_1.add(textField_2);
     
-    JLabel lblPartOfSpech = new JLabel("Parts of Speech");
+    JLabel lblPartOfSpech = new JLabel("Parts of Speech*");
     lblPartOfSpech.setFont(new Font("Tahoma", Font.BOLD, 18));
     lblPartOfSpech.setBounds(336, 130, 157, 20);
     panel_1.add(lblPartOfSpech);
@@ -214,6 +214,11 @@ public class Dictionay {
     textField_3.setColumns(10);
     textField_3.setBounds(20, 400, 286, 20);
     panel_1.add(textField_3);
+    
+    JLabel lblRequred = new JLabel("* = required");
+    lblRequred.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    lblRequred.setBounds(20, 513, 137, 20);
+    panel_1.add(lblRequred);
     
     JScrollPane scrollPane_2 = new JScrollPane();
     panel.add(scrollPane_2, "defintions");
@@ -284,7 +289,7 @@ public class Dictionay {
                   definitionCounter++;
                 }
                 String[] synonyms = word.getSynonyms();
-                if(synonyms.length != 0) {
+                if(synonyms != null && synonyms.length != 0) {
                   doc.insertString(doc.getLength(),"Synonyms\n" ,header );
                   doc.insertString(doc.getLength(),"\n" ,null );
                   int synonymCounter = 1;
@@ -295,7 +300,7 @@ public class Dictionay {
                   }
                 }
                 String[] antonyms = word.getAntonyms();
-                if (antonyms.length != 0) {
+                if (antonyms != null && antonyms.length != 0) {
                   doc.insertString(doc.getLength(),"\n" ,null );
                   doc.insertString(doc.getLength(),"Antonyms\n" ,header );
                   doc.insertString(doc.getLength(),"\n" ,null );
@@ -343,56 +348,71 @@ public class Dictionay {
       	  String synonymInput = textField_1.getText().toLowerCase();
       	  String antonymsInput = textField_3.getText().toLowerCase();
       	  
-      	  ArrayList<Words> wordList = new ArrayList<Words>();
-      	  try {
-  			wordList = getWordClass();
-      	  } catch (FileNotFoundException e1) {
-  			// TODO Auto-generated catch block
-  			e1.printStackTrace();
-      	  }
-      	  String[] definitions = definitionInput.split("\\s*,\\s*");
-      	  String[] poss = posInput.split("\\s*,\\s*");
-      	  String[] synonyms = synonymInput.split("\\s*,\\s*");
-      	  String[] antonyms = antonymsInput.split("\\s*,\\s*");
-      	  
-      	  if(definitions.length == poss.length) {
-      		  System.out.println("pass");
-      		  Definitions[] deffs = new Definitions[definitions.length];
-          	  for (int i = 0; i < definitions.length; i++) {
-          		  deffs[i] = new Definitions(definitions[i],poss[i]);
-          	  }
-          	  Words wordToAdd = new Words(word, deffs, synonyms,antonyms);
-          	  wordList.add(wordToAdd);
-          	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String classpathDirectory = Utils.getClasspathDir();
-             try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
-                      gson.toJson(wordList, writer);
-                      System.out.println("word added");
-                  } catch (IOException e1) {
-                      e1.printStackTrace( );
-                  }
-             DefaultListModel<String> DLM = null;
-             if (!rdbtnNewRadioButton.isSelected()) {
-			     try {
-			     	DLM = Utils.reverseOrder(getWords());
-			   } catch (FileNotFoundException e2) {
-			     // TODO Auto-generated catch block
-			     e2.printStackTrace();
-			   }
+      	  if(!word.equals("") || !definitionInput.equals("")|| !posInput.equals("")) {
+      		System.out.println(word);
+      		 ArrayList<Words> wordList = new ArrayList<Words>();
+         	  try {
+     			wordList = getWordClass();
+         	  } catch (FileNotFoundException e1) {
+     			// TODO Auto-generated catch block
+     			e1.printStackTrace();
+         	  }
+         	  String[] definitions = definitionInput.split("\\s*,\\s*");
+         	  String[] poss = posInput.split("\\s*,\\s*");
+         	  String[] synonyms = synonymInput.split("\\s*,\\s*");
+         	  String[] antonyms = antonymsInput.split("\\s*,\\s*");
+         	  System.out.println(synonyms.length);
+         	  
+         	  if(definitions.length == poss.length) {
+         		  System.out.println("pass");
+         		  Definitions[] deffs = new Definitions[definitions.length];
+             	  for (int i = 0; i < definitions.length; i++) {
+             		  deffs[i] = new Definitions(definitions[i],poss[i]);
+             	  }
+             	  if(synonymInput.equals("")) {
+             		 synonyms = null;
+             	  }
+             	 if(antonymsInput.equals("")) {
+             		antonyms = null;
+             	  }
+             	  Words wordToAdd = new Words(word, deffs, synonyms, antonyms);
+             	  wordList.add(wordToAdd);
+             	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+               String classpathDirectory = Utils.getClasspathDir();
+                try (FileWriter writer = new FileWriter(classpathDirectory +"words.json")) {
+                         gson.toJson(wordList, writer);
+                         System.out.println("word added");
+                     } catch (IOException e1) {
+                         e1.printStackTrace( );
+                     }
+                DefaultListModel<String> DLM = null;
+                if (!rdbtnNewRadioButton.isSelected()) {
+   			     try {
+   			     	DLM = Utils.reverseOrder(getWords());
+   			   } catch (FileNotFoundException e2) {
+   			     // TODO Auto-generated catch block
+   			     e2.printStackTrace();
+   			   }
 
-			 } else {
-			   try {
-			 	  DLM = getWords();
-			   } catch (FileNotFoundException e1) {
-			     // TODO Auto-generated catch block
-			     e1.printStackTrace();
-			   }
-			 }
-             list.setModel(DLM);
+   			 } else {
+   			   try {
+   			 	  DLM = getWords();
+   			   } catch (FileNotFoundException e1) {
+   			     // TODO Auto-generated catch block
+   			     e1.printStackTrace();
+   			   }
+   			 }
+                list.setModel(DLM);
+         	  }else {
+         		  System.out.println("fail");
+         		  JOptionPane.showMessageDialog(null, "Amount of definitions and parts of speech do not match!");
+         	  }
       	  }else {
-      		  System.out.println("fail");
-      		  JOptionPane.showMessageDialog(null, "Amount of definitions and parts of speech do not match!");
+      		 System.out.println("fail");
+    		  JOptionPane.showMessageDialog(null, "Required field was left empty!");
       	  }
+      	  
+      	 
     		cardLayout.show(panel, "defintions");
     	}
     });
@@ -432,7 +452,6 @@ public class Dictionay {
                   e.printStackTrace( );
               }
 
-
       }
     } catch (FileNotFoundException e) {
       // TODO Auto-generated catch block
@@ -457,6 +476,7 @@ public class Dictionay {
           }
         }
       list.setModel(DLM);
+      txtSearch.setText(" ");
       doc.remove(0, doc.getLength());
       doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
         doc.insertString(doc.getLength(),"\n" , null );
