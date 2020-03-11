@@ -38,12 +38,15 @@ import java.util.List;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import java.awt.CardLayout;
+import java.awt.Font;
 
 public class Dictionay {
 
   private JFrame frmDictionary;
   private JTextField txtSearch;
   private final ButtonGroup buttonGroup = new ButtonGroup();
+  private JTextField textField;
 
   /**
    * Launch the application.
@@ -114,23 +117,46 @@ public class Dictionay {
     frmDictionary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frmDictionary.getContentPane().setLayout(null);
 
+    JPanel panel = new JPanel();
+    panel.setBounds(207, 11, 566, 549);
+    frmDictionary.getContentPane().add(panel);
+    panel.setLayout(new CardLayout(0, 0));
+    
+    JScrollPane scrollPane_3 = new JScrollPane();
+    panel.add(scrollPane_3, "addWord");
+    
+    JPanel panel_1 = new JPanel();
+    panel_1.setBackground(Color.WHITE);
+    scrollPane_3.setViewportView(panel_1);
+    panel_1.setLayout(null);
+    
+    JLabel lblNewLabel = new JLabel("Word");
+    lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
+    lblNewLabel.setBounds(10, 11, 117, 54);
+    panel_1.add(lblNewLabel);
+    
+    textField = new JTextField();
+    textField.setBounds(20, 76, 286, 20);
+    panel_1.add(textField);
+    textField.setColumns(10);
+    
     JScrollPane scrollPane_2 = new JScrollPane();
-    scrollPane_2.setBounds(207, 11, 566, 549);
-    frmDictionary.getContentPane().add(scrollPane_2);
+    panel.add(scrollPane_2, "defintions");
+    
+    CardLayout cardLayout = (CardLayout) panel.getLayout();
+    cardLayout.show(panel, "defintions");
     
     JTextPane textPane = new JTextPane();
-//  textPane.setEnabled(false);
-//  textPane.setVisible(false);
     textPane.setEditable(false);
     scrollPane_2.setViewportView(textPane);
 
-    
     StyledDocument doc = textPane.getStyledDocument();
     DefaultCaret caret = (DefaultCaret) textPane.getCaret();
     caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
     textPane.setBorder(BorderFactory.createCompoundBorder(
         textPane.getBorder(),
             BorderFactory.createEmptyBorder(10, 10 ,10 , 10)));
+    
     Style bigWord = textPane.addStyle("Style", null);
     Style header = textPane.addStyle("Style", null);
     StyleConstants.setFontSize(header, 20);
@@ -228,17 +254,7 @@ public class Dictionay {
 //      add
       public void actionPerformed(ActionEvent e) {
         System.out.println("add");
-        scrollPane_2.removeAll();
-        scrollPane_2.repaint();
-        JPanel panel = new JPanel();
-        panel.setEnabled(false);
-        panel.setVisible(false);
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null);
-        JLabel lblBruh = new JLabel("Bruh");
-        lblBruh.setBounds(70, 99, 208, 51);
-        panel.add(lblBruh);
-        scrollPane_2.setViewportView(panel);
+        cardLayout.show(panel, "addWord");
       }
     });
     btnNewButton.setBounds(2, 11, 89, 23);
