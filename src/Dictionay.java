@@ -335,20 +335,26 @@ public class Dictionay {
       public void actionPerformed(ActionEvent e) {
     	  System.out.println("add");
           cardLayout.show(panel, "addWord"); 
+          textField.setText("");
+          txtDefinitions.setText("");
+          textField_2.setText("");
+          textField_1.setText("");
+          textField_3.setText("");
+          
       }
     });
     btnNewButton.setBounds(2, 11, 89, 23);
     frmDictionary.getContentPane().add(btnNewButton);
 
     btnNewButton_2.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e) {
+    	public void actionPerformed(ActionEvent e) {    		
     	  String word = textField.getText().toLowerCase();
       	  String definitionInput = txtDefinitions.getText().toLowerCase();
       	  String posInput = textField_2.getText().toLowerCase();
       	  String synonymInput = textField_1.getText().toLowerCase();
       	  String antonymsInput = textField_3.getText().toLowerCase();
-      	  
-      	  if(!word.equals("") || !definitionInput.equals("")|| !posInput.equals("")) {
+      	  word = word.trim();
+      	  if(!word.equals("") && !definitionInput.equals("") && !posInput.equals("")) {
       		System.out.println(word);
       		 ArrayList<Words> wordList = new ArrayList<Words>();
          	  try {
@@ -476,7 +482,7 @@ public class Dictionay {
           }
         }
       list.setModel(DLM);
-      txtSearch.setText(" ");
+      txtSearch.setText("");
       doc.remove(0, doc.getLength());
       doc.insertString(doc.getLength(),"Example Word\n" ,bigWord );
         doc.insertString(doc.getLength(),"\n" , null );
